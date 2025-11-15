@@ -1,15 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const { client } = require('../db/config');
-const { ObjectId } = require('mongodb');
 const contactsController = require('../controllers/contacts');
 
-const db = client.db("myDatabase");
-
 // GET all contacts
-router.get('/', contactsController.getAllContacts);
+router.get('/', 
+    //#swagger.tags=['Contacts']
+    contactsController.getAllContacts
+);
 
 // GET contact by ID
-router.get('/:id', contactsController.getContactById);
+router.get('/:id', 
+    //#swagger.tags=['Contacts']
+    contactsController.getContactById
+);
+
+// Create
+router.post('/', 
+    //#swagger.tags=['Contacts']
+    contactsController.createContact
+);
+
+// Update
+router.put('/:id', 
+    //#swagger.tags=['Contacts']
+    contactsController.updateContact
+);
+
+// Delete
+router.delete('/:id', 
+    //#swagger.tags=['Contacts']
+    contactsController.deleteContact
+);
 
 module.exports = router;
