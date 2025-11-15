@@ -9,12 +9,14 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/', require('./routes'));
+app.use('/', require('./routes/index'));
 
-// Connect to DB
+const contactsRoutes = require('./routes/contacts');
+
+app.use('/contacts', contactsRoutes);
+
 const startServer = async () => {
-    await connectDB();
+    await connectDB(); 
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     })
